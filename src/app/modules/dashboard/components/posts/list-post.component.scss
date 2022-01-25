@@ -1,0 +1,27 @@
+.list-posts {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+.list-item-posts {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 15px;
+}
+.post-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    width: 100px;
+}
+.post-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    width: 500px;
+}

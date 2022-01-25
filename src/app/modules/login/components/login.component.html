@@ -1,0 +1,7 @@
+<div class="form-login-page">
+    <form [formGroup]="loginForm" class="form-input-box">
+        Username : <input type="text" formControlName="username" id="username" />
+        Password : <input type="password" formControlName="password" id="password" />
+    </form>
+    <button (click)="login()" type="button" >submit</button>
+</div>

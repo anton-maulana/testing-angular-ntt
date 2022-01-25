@@ -1,0 +1,14 @@
+<div class="list-posts">
+    <div *ngIf="isLoading">Loading....</div>
+    <div *ngFor="let post of listPosts | paginate: { itemsPerPage: 10, currentPage: page }" class="list-item-posts">
+        <div class="post-name">{{post?.user?.username}}</div>
+        <div>
+            <div class="post-title">{{post?.title}}</div>
+            <div style="margin-top: 20px;"><button (click)="openDetail(post.id)">detail</button></div>
+        </div>
+        
+    </div>
+</div>
+<div class="has-text-centered">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
