@@ -16,6 +16,7 @@ import { find, map } from "rxjs/operators";
 })
 export class LoginComponent implements OnInit, OnDestroy {
     loginForm: TypedFormGroup<LoginModel>;
+    users: User[] = [];
     constructor(
         private formBuilder: FormBuilder,
         private typicodeService: TypiCodeService,
@@ -25,7 +26,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm = this.createLoginForm(this.formBuilder);
     }
     ngOnInit(): void {
-        
+        this.typicodeService.getUsers().subscribe( res => {
+            if (res) {
+                this.authService.setUserAllUsers(res);
+                this.users = res;
+            }
+        })
     }
     createLoginForm(formBuilder: FormBuilder): TypedFormGroup<LoginModel> {
         let form = formBuilder.group({
@@ -39,17 +45,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     login() {
         if (this.loginForm?.invalid)
             return;
-        this.typicodeService.getUsers().subscribe( res => {
-            let user = res.
-                find(e => e.username.toLowerCase() === this.loginForm.value.username.toLowerCase());
-            if (user) {
-                this.authService.deleteCurrentUser();
-                this.authService.setUser(user);
-                this.router.navigateByUrl("/dashboard");
-            } else {
-                alert(`User ${this.loginForm.value.username} not found.`)
-            }
-        })
+        
+        let user = this.users.
+            find(e => e.username.toLowerCase() === this.loginForm.value.username.toLowerCase());
+        if (user) {
+            this.authService.setUser(user);
+            this.router.navigateByUrl("/dashboard");
+        } else {
+            alert(`User ${this.loginForm.value.username} not found.`)
+        }
     }
     
     ngOnDestroy(): void {

@@ -1,0 +1,19 @@
+<div style="width: 200px; margin-bottom: 20px;"><button routerLink="/">back</button></div>
+<div style="display: flex; flex-direction: column; gap: 30px" >
+    <div style="display: flex; flex-direction: row;">
+        <div style="width: 200px;">Username</div>
+        <div>{{detailUser?.username}}</div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <div style="width: 200px;">Email</div>
+        <div>{{detailUser?.email}}</div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <div style="width: 200px;">Address</div>
+        <div>{{detailUser?.address?.street}}</div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <div style="width: 200px;">Phone</div>
+        <div>{{detailUser?.phone}}</div>
+    </div>
+</div>

@@ -17,9 +17,22 @@ export class AuthService {
     }
 
     setUser(newUser?: User): void {
-        let strObj =  JSON.stringify(newUser);
-        console.log(strObj)
         this.cookieService.set(CookieNames.CURRENT_USER, JSON.stringify(newUser));
+    }
+
+    setUserAllUsers(users: User[]): void {
+        this.cookieService.set(CookieNames.ALL_USERS, JSON.stringify(users));
+    }
+
+    getAllUsers(): User[] {
+        let res: User[] = [];
+        let val = this.cookieService.get(CookieNames.ALL_USERS);
+        try {
+            res = JSON.parse(val);            
+        } catch(e) {
+            console.error("invalid value")
+        }
+        return res;
     }
 
     getCurrentUser(): User | null {
@@ -41,5 +54,9 @@ export class AuthService {
 
     deleteCurrentUser(): void {
         this.cookieService.delete(CookieNames.CURRENT_USER);
+    }
+
+    logout(): void {
+        this.cookieService.deleteAll();
     }
 }

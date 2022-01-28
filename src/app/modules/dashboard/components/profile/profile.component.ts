@@ -6,11 +6,11 @@ import { TypiCodeService } from "@app/services/typicode.service";
 
 @Component({
     selector: "dashboard",
-    styleUrls: ['./dashboard-base.component.scss'],
-    templateUrl: './dashboard-base.component.html'
+    styleUrls: ['./profile.component.scss'],
+    templateUrl: './profile.component.html'
 })
-export class DashboardBaseComponent implements OnInit, OnDestroy {
-    currentUser: User | null | undefined;
+export class ProfileComponent implements OnInit, OnDestroy {
+    detailUser: User | undefined;
     constructor(
         private router: Router,
         private typicodeService: TypiCodeService,
@@ -19,22 +19,15 @@ export class DashboardBaseComponent implements OnInit, OnDestroy {
 
     }
     ngOnInit(): void {
-        this.currentUser = this.authService.getCurrentUser();
+        let user = this.authService.getCurrentUser();
+        if (user?.id){
+            this.typicodeService.getUsersById(user?.id).subscribe(res => {
+                this.detailUser = res;
+            })
+        }
     }
     
     ngOnDestroy(): void {
         
-    }
-
-    logout() {
-        this.authService.logout();
-        this.router.navigateByUrl("/")
-    }
-
-    routeToLogin() {
-        this.router.navigateByUrl("/login")
-    }
-    routeToProfile() {
-        this.router.navigateByUrl("/dashboard/profile")
     }
 }

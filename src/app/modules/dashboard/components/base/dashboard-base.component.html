@@ -1,8 +1,21 @@
 <div class="base-header-dashboard">
     <h2>Cinta Coding</h2>
     <b><h3>Post</h3></b>
-    <h2><b>Welcome, {{currentUser?.name}}</b>
-    <button (click)="logout()" style="margin-left: 20px">logout</button></h2>
+    <h2>
+        <b>Welcome, 
+            <div class="dropdown">
+            <span>{{currentUser?.name}}</span>
+                <div class="dropdown-content">
+                    <button style="background: none;color: blue;border: none;cursor: pointer;" routerLink="/dashboard/profile">
+                        Detail Profile
+                    </button>
+                    <button style="background: none;color: blue;border: none;cursor: pointer;"(click)="logout()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </b>
+    </h2>
 
 </div>
 <div class="content-page">

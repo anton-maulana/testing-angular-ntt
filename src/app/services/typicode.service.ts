@@ -6,6 +6,7 @@ import { HttpClientRequestHelper as RequestHelper } from '@app/helpers/httpclien
 import { Query } from "@app/models/query";
 import { User } from "@app/models/user";
 import { Post } from "@app/models/post";
+import { Comment } from "@app/models/comment";
 
 @Injectable()
 export class TypiCodeService {
@@ -25,6 +26,15 @@ export class TypiCodeService {
         return this.httpClient.request<User[]>('GET', urlJoin(this.__baseUrl, 'users'), request);
     }
 
+    public getUsersById(id: number, query?: Query) {
+        let request = RequestHelper.getRequest(
+            null,
+            query,
+            false
+        )
+        return this.httpClient.request<User>('GET', urlJoin(this.__baseUrl, 'users', id), request);
+    }
+
     public getPosts(query?: Query) {
         let request = RequestHelper.getRequest(
             null,
@@ -34,12 +44,21 @@ export class TypiCodeService {
         return this.httpClient.request<Post[]>('GET', urlJoin(this.__baseUrl, 'posts'), request);
     }
 
-    public getCommentByPostId({ query, postId }: { query?: Query; postId: number; }) {
+    public getCommentByPostId(postId: number, query?: Query) {
         let request = RequestHelper.getRequest(
             null,
             query,
             false
         )
-        return this.httpClient.request<Post[]>('GET', urlJoin(this.__baseUrl, 'posts', postId, 'comments'), request);
+        return this.httpClient.request<Comment[]>('GET', urlJoin(this.__baseUrl, 'posts', postId, 'comments'), request);
+    }
+
+    public getPostsById(id: number, query?: Query) {
+        let request = RequestHelper.getRequest(
+            null,
+            query,
+            false
+        )
+        return this.httpClient.request<Post>('GET', urlJoin(this.__baseUrl, 'posts', id), request);
     }
 }
