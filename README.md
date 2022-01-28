@@ -1,5 +1,14 @@
 # NttApp
 
+This project only for Testing
+To be running project, open command prompt or terminal and typing:
+=> npm instal
+=> npm start
+
+example for login 
+=> username: bret
+=> password: bret
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
 
 ## Development server
